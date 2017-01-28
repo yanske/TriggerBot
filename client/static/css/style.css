@@ -26,6 +26,15 @@ a.uni
   color: white;
 }
 
+#microphone{
+    background: url("../img/mp_normal.png") no-repeat;
+    height: 25px;
+    width: 25px;
+}
+#microphone:hover{
+    background: url("../img/mp_onclick.png") no-repeat;
+}
+
 
 h1,
 h2,
@@ -107,13 +116,5 @@ header .col-lg-6{
     font-size: 1.75em;
     color: #2E2E2E;
   }
-}
-
-@media (min-width: 992px) {
-
-  }
-}
-@media (min-width: 1200px) {
-
 }
 
