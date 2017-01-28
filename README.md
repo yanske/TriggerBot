@@ -1,2 +1,3 @@
 # TriggerBot
-McHacks2017
+
+McHacks2017 Submission

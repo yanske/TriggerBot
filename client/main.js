@@ -15,8 +15,11 @@ window.onload = function(){
     if(!socket){
       socket = io();
 
-      socket.on("send-reply", function(response, mood){
+      socket.on("send-reply", function(response){
         responseText.innerHTML = response;
+      });
+
+      socket.on("send-mood", function(mood){
         moodText.innerHTML = "Mood: " + mood;
       });
     }

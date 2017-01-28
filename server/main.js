@@ -4,14 +4,19 @@ var comp    = require("compression");
 var http    = require("http").createServer(app);
 var io      = require("socket.io").listen(http);
 
-var sockets = {};
+//var sockets = {};
 
 var moodValue = 0;
 
 io.on("connection", function(socket){
+  //sockets[socket.id] = socket;
+  socket.emit("send-mood", moodValue);
+
   socket.on("send-message", function(message){
-    socket.emit("send-reply", message + " aylmao", moodValue);
+
+    socket.emit("send-reply", message + " aylmao");
     moodValue++;
+    io.sockets.emit("send-mood", moodValue);
   });
 
 });
