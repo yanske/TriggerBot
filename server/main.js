@@ -36,7 +36,7 @@ function getMood(message){
       id: "" + documentId,
       text: message
   });
-  if (result[0].status === "PROCESSED"){
+  if (result && result[0].status === "PROCESSED"){
       var data = session.getDocument(documentId);
       return data.sentiment_score;
   }
