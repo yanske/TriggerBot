@@ -22,10 +22,22 @@
     <link href="static/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="lib/angular-animate.min.js"></script>
+    <!-- Theme CSS -->
+    <link href="static/css/hover.css" rel="stylesheet">
+    <script type="text/javascript" src="static/js/hover.js"></script>
 
 </head>
 
-<body>
+<body ng-app="myApp" ng-controller="myCtrl">
+<div style = "position: fixed; bottom: 0px; right: 150px;" ng-mouseenter="about=true" ng-mouseleave="about=false">
+        <h2>About</h2>
+    </div>
+<div style = "bottom: 48px;position: absolute;right: 83px;" ng-show="about">
+    <p class="bubble speech"><b>TriggerBot</b> takes in text or speech input, analyzes the sentiment of the phrase, and returns a numerical result. It considers both the quality of the input phrase as well CleverBot's response to the phrase to complete this analysis.
+    </p>
+</div>
     <div class="container">
         <div class="row">
             <div class="col-lg-12 description">
