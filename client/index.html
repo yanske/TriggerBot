@@ -22,32 +22,29 @@
 
 </head>
 
-<body id="page-top" class="index">
-    <!-- Header -->
-     <header>
-        <div class="container">
-            <div class="row" style = "margin: 10% 0;">
-                <div class="col-lg-12 description">
-                    <div class="intro-text">
-                        <span id="name">#NotTriggered</span>
-                    </div>
-
-                    <button id = "listen-btn" style = "position: absolute;right: 200px; top: 125px; border: none; background: white; height: 25px; width: 25px">
-                        <div id = "microphone"> </div>
-                    </button>
-                    <input type="text" id="input-text" class="form-control" style = "width: 70%;">
-
-                    <div style = "height: 30px;"></div>
-                    <button id="submit-btn" class ="rad-button danger flat">Trigger Me</button>
-                    <div style = "height: 30px;"></div>
-
-                    <p id="mood">Mood: 0</p>
-
-                    <div id="response">...</div>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 description">
+                <div class="intro-text">
+                    <span id="name">#NotTriggered</span>
                 </div>
+
+                <div id="bar">
+                  <button id="listen-btn">
+                      <div id="microphone"></div>
+                  </button>
+                  <input type="text" id="input-text" class="form-control">
+                </div>
+
+                <button id="submit-btn" class ="rad-button danger flat">Trigger Me</button>
+
+                <p id="mood">Mood: 0</p>
+
+                <div id="response">...</div>
             </div>
         </div>
-    </header>
+    </div>
 
     <!-- JS -->
 

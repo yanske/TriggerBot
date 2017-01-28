@@ -6,6 +6,7 @@ body {
   font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   overflow-x: hidden;
   height: 100%;
+  background-image: url(../img/pattern/main.png);
 }
 
 p.tab {
@@ -21,59 +22,63 @@ a.tabs{
   color: #333;
 }
 
-a.uni
-{
+a.uni{
   color: white;
+}
+
+#bar{
+  position: relative;
+  width: 70%;
+}
+
+#input-text{
+  display: inline;
 }
 
 #microphone{
     background: url("../img/mp_normal.png") no-repeat;
-    height: 25px;
-    width: 25px;
+    height: 20px;
+    width: 20px;
 }
 #microphone:hover{
     background: url("../img/mp_onclick.png") no-repeat;
 }
 
+#listen-btn{
+  position: absolute;
+  right: 10px;
+  top: 7px;
+  border: none;
+  background: white;
+  padding: 0;
+}
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+#submit-btn{
+  margin: 30px 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
   font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-transform: uppercase;
   font-weight: 700;
 }
 
-.img-centered {
-  margin: 0 auto;
-}
-
-header {
-  text-align: center;
-  background-image: url(../img/pattern/main.png);
+.container {
   /*background: repeat;*/
 }
 
-header .container {
+.container {
+  text-align: center;
   padding-top: 0px;
   padding-bottom: 0px;
   height: 100vh;
 }
 
-header .row{
-  display: block;
- /* flex-direction: row;*/
+.container .row{
+  margin: 10% 0;
 }
 
-header .img {
-  display: none;
-  /*margin: 0 auto 20px;*/
-}
-
-header .description{
+.container .description{
   display:flex;
   justify-content:center;
   align-items:center;
@@ -81,7 +86,7 @@ header .description{
   flex-direction: column;
 }
 
-header .intro-text #name {
+.container .intro-text #name {
   display: block;
   font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-transform: uppercase;
@@ -91,30 +96,29 @@ header .intro-text #name {
 }
 
 
-header .col-lg-6{
+.container .col-lg-6{
   padding-right: 0px;
   padding-left: 0px;
 }
 
 @media (min-width: 768px) {
-  header .img{
+  .container .img{
     display: block;
   }
-  header .row{
+  .container .row{
     display: flex;
     direction: row;
   }
-  header .container {
+  .container .container {
     padding-top: -px;
     padding-bottom: 0px;
   }
-  header .intro-text #name {
+  .container .intro-text #name {
     font-size: 6em;
   }
-  header .intro-text .edu {
+  .container .intro-text .edu {
     padding-top: 0px;
     font-size: 1.75em;
     color: #2E2E2E;
   }
 }
-

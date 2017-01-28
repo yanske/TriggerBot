@@ -24,6 +24,7 @@ io.on("connection", function(socket){
   socket.emit("send-mood", moodValue); //init
 
   socket.on("send-message", function(message){
+    console.log("Message: " + message);
     var messageMood = getMood(message);
     moodValue += messageMood;
     console.log("Message: " + message + ", " + messageMood);

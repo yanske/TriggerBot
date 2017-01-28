@@ -1,5 +1,6 @@
 var socket;
-
+var count = 0;
+var loading;
 window.onload = function(){
   var inputText = document.getElementById("input-text");
   var sendBtn = document.getElementById("submit-btn");
@@ -12,6 +13,12 @@ window.onload = function(){
 
   sendBtn.onclick = function(){
     socket.emit("send-message", inputText.value);
+
+    count = 0;
+    loading = setInterval(function(){
+      document.getElementById("response").innerHTML = "Thinking." + new Array(count % 4 + 1).join('.');
+      count++;
+    }, 500);
   };
 
   listenBtn.onclick = function(){
@@ -41,6 +48,7 @@ window.onload = function(){
       socket = io();
 
       socket.on("send-reply", function(response){
+        clearInterval(loading);
         responseText.innerHTML = response;
       });
 
