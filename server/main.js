@@ -37,8 +37,11 @@ io.on("connection", function(socket){
         moodValue += responseMood;
         console.log("Response: " + response + ", " + responseMood);
 
+        if(moodValue > 5) moodValue = 5;
+        else if(moodValue < -5) moodValue = -5;
+
         socket.emit("send-reply", response);
-        io.sockets.emit("send-mood", moodValue);
+        io.sockets.emit("send-mood", Math.round(moodValue * 1000) / 1000);
       }
     });
   });

@@ -59,12 +59,16 @@ window.onload = function(){
       });
 
       socket.on("send-mood", function(mood){
-        if(mood > 5) mood = 5;
-        else if(mood < -5) mood = -5;
-        moodText.innerHTML = "Mood: " + (Math.round(mood * 1000) / 1000);
+        moodText.innerHTML = "Mood: " + mood;
         colourBarUpdate(mood);
         if(mood < 0) title.innerHTML = "#Triggered";
         else title.innerHTML = "#NotTriggered";
+
+        if(mood === -5) title.className = "shake-constant shake-crazy";
+        else if(mood < -4) title.className = "shake-constant shake-hard";
+        else if(mood < -3) title.className = "shake-constant shake";
+        else if(mood < -2) title.className = "shake-constant shake-little";
+        else title.className = "";
       });
     }
   })();
