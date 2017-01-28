@@ -21,6 +21,7 @@ io.on("connection", function(socket){
 
 });
 
+app.use('/api/speech-to-text/', require('./stt-token.js'));
 
 app.use(comp());
 app.use(express.static(__dirname + '/../client'));
