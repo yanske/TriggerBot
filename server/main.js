@@ -1,8 +1,8 @@
-var express = require("express");
-var app     = express();
-var comp    = require("compression");
-var http    = require("http").createServer(app);
-var io      = require("socket.io").listen(http);
+var express   = require("express");
+var app       = express();
+var comp      = require("compression");
+var http      = require("http").createServer(app);
+var io        = require("socket.io").listen(http);
 
 var Semantria = require('semantria-node');
 var session = new Semantria.Session(
@@ -10,28 +10,41 @@ var session = new Semantria.Session(
         "e3af47b5-4078-432a-9d9e-35f648ce0ffa"
     );
 
+var cleverbot = require("cleverbot.io");
+var clever = new cleverbot('kyZYjP2JiUwC20IJ','bTCuN7rZLroqzrH9q1PfauT2eiYVJhkZ');
+clever.setNick("TriggerBot");
+clever.create(function(err, session){
+  if(err) console.log(err);
+});
 
-//var sockets = {};
 
 var moodValue = 0;
 
 io.on("connection", function(socket){
-  //sockets[socket.id] = socket;
-  socket.emit("send-mood", moodValue);
+  socket.emit("send-mood", moodValue); //init
 
   socket.on("send-message", function(message){
     var messageMood = getMood(message);
     moodValue += messageMood;
-    console.log(message + ": " + messageMood);
+    console.log("Message: " + message + ", " + messageMood);
 
-    socket.emit("send-reply", message + " aylmao");
-    io.sockets.emit("send-mood", moodValue);
+    clever.ask(message, function(err, response){
+      if(err) console.log(err);
+      else{
+        var responseMood = getMood(response);
+        moodValue += responseMood;
+        console.log("Response: " + response + ", " + responseMood);
+
+        socket.emit("send-reply", response);
+        io.sockets.emit("send-mood", moodValue);
+      }
+    });
   });
 
 });
 
 function getMood(message){
-  var documentId = (new Date).getTime();
+  var documentId = (new Date()).getTime();
   var result = session.queueDocument({
       id: "" + documentId,
       text: message
@@ -40,6 +53,7 @@ function getMood(message){
       var data = session.getDocument(documentId);
       return data.sentiment_score;
   }
+  return 0;
 }
 
 app.use('/api/speech-to-text/', require('./stt-token.js'));

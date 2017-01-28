@@ -29,7 +29,7 @@
             <div class="row" style = "margin: 10% 0;">
                 <div class="col-lg-12 description">
                     <div class="intro-text">
-                        <span class="name">#NotTriggered</span>
+                        <span id="name">#NotTriggered</span>
                     </div>
 
                     <img src = "static/img/mp.png" style = "height: 20px; width: 20px; position: absolute;right: 190px; top: 127px;">
@@ -38,14 +38,11 @@
                     <div style = "height: 30px;"></div>
                     <button id="submit-btn" class ="rad-button danger flat">Trigger Me</button>
                     <button id="listen-btn" class ="rad-button danger flat">Listen Me</button>
-                    <button id="stop-btn" class ="rad-button danger flat">Stop Me</button>
                     <div style = "height: 30px;"></div>
 
                     <p id="mood">Mood: 0</p>
 
                     <div id="response">...</div>
-
-                    <div id="div-text">---</div>
                 </div>
             </div>
         </div>
@@ -74,9 +71,7 @@
     <!-- Custom JS -->
     <script type="text/javascript" src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
     <script type="text/javascript" src="static/js/main.js"></script>
-    <script type="text/javascript" src="watson-speech.js"></script>
-    <script src="./cleverbot.io.min.js"></script>
-    <script src="./cleverbot.js"></script>
+    <script type="text/javascript" src="static/js/watson-speech.js"></script>
     <!-- Smooth Scrolling for a links -->
     <script src= "static/js/scroll.js"></script>
 

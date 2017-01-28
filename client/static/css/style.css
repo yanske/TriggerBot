@@ -76,7 +76,7 @@ header .description{
   flex-direction: column;
 }
 
-header .intro-text .name {
+header .intro-text #name {
   display: block;
   font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-transform: uppercase;
@@ -108,7 +108,7 @@ header .col-lg-6{
     padding-top: -px;
     padding-bottom: 0px;
   }
-  header .intro-text .name {
+  header .intro-text #name {
     font-size: 6em;
   }
   header .intro-text .edu {
