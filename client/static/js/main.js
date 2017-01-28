@@ -1,6 +1,7 @@
 var socket;
 var count = 0;
 var loading;
+var thinking = false;
 window.onload = function(){
   var inputText = document.getElementById("input-text");
   var sendBtn = document.getElementById("submit-btn");
@@ -12,13 +13,16 @@ window.onload = function(){
   var title = document.getElementById("name");
 
   sendBtn.onclick = function(){
-    socket.emit("send-message", inputText.value);
+    if(!thinking){
+      thinking = true;
+      socket.emit("send-message", inputText.value);
 
-    count = 0;
-    loading = setInterval(function(){
-      document.getElementById("response").innerHTML = "Thinking." + new Array(count % 4 + 1).join('.');
-      count++;
-    }, 500);
+      count = 0;
+      loading = setInterval(function(){
+        document.getElementById("response").innerHTML = "Thinking." + new Array(count % 4 + 1).join('.');
+        count++;
+      }, 500);
+    }
   };
 
   listenBtn.onclick = function(){
@@ -36,13 +40,16 @@ window.onload = function(){
 
       sendBtn.onclick = function(){
         if(stream) stream.stop();
-        socket.emit("send-message", inputText.value);
+        if(!thinking){
+          thinking = true;
+          socket.emit("send-message", inputText.value);
 
-        count = 0;
-        loading = setInterval(function(){
-          document.getElementById("response").innerHTML = "Thinking." + new Array(count % 4 + 1).join('.');
-          count++;
-        }, 500);
+          count = 0;
+          loading = setInterval(function(){
+            document.getElementById("response").innerHTML = "Thinking." + new Array(count % 4 + 1).join('.');
+            count++;
+          }, 500);
+        }
       };
     }).catch(function(error){
       console.log(error);
@@ -59,6 +66,7 @@ window.onload = function(){
       });
 
       socket.on("send-mood", function(mood){
+        thinking = false;
         moodText.innerHTML = "Mood: " + mood;
         colourBarUpdate(mood);
         if(mood < 0) title.innerHTML = "#Triggered";
