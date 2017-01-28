@@ -59,27 +59,25 @@ a.uni{
 
 #statusBar {
     position: relative;
-    height: 7px;
+    height: 15px;
     width: 50%;
     border: 2px solid black;
     border-radius: 1px;
     margin-bottom: 10px;
+    background-color: #eee;
 }
 
 #greenBarFiller {
-    left:50%;
-    position:absolute;
-    height:3px;
-    width:0px;
+    left: 50%;
+    position: absolute;
+    height: 100%;
     background: green;
 }
 
 #redBarFiller {
-    left: calc(50% - 0px);
-    position:absolute;
-    height:3px;
-    width: 0px;
-    background:red;
+    position: absolute;
+    height: 100%;
+    background: red;
 }
 
 

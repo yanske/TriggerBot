@@ -37,6 +37,12 @@ window.onload = function(){
       sendBtn.onclick = function(){
         if(stream) stream.stop();
         socket.emit("send-message", inputText.value);
+
+        count = 0;
+        loading = setInterval(function(){
+          document.getElementById("response").innerHTML = "Thinking." + new Array(count % 4 + 1).join('.');
+          count++;
+        }, 500);
       };
     }).catch(function(error){
       console.log(error);
@@ -53,7 +59,9 @@ window.onload = function(){
       });
 
       socket.on("send-mood", function(mood){
-        moodText.innerHTML = "Mood: " + mood;
+        if(mood > 5) mood = 5;
+        else if(mood < -5) mood = -5;
+        moodText.innerHTML = "Mood: " + (Math.round(mood * 1000) / 1000);
         colourBarUpdate(mood);
         if(mood < 0) title.innerHTML = "#Triggered";
         else title.innerHTML = "#NotTriggered";
@@ -63,19 +71,16 @@ window.onload = function(){
 };
 
 function colourBarUpdate(mood) {
-    var obj = document.getElementById('greenBarFiller');
-    var obj2 = document.getElementById('redBarFiller');
-    
-    if (mood > 5)
-        mood = 5;
-    
-    if (mood > 0) {
-        obj.style.width = mood*10 + "%";
-        obj2.style.width = "0";
+    var greenBar = document.getElementById('greenBarFiller');
+    var redBar = document.getElementById('redBarFiller');
+
+    if(mood > 0) {
+        greenBar.style.width = mood*10 + "%";
+        redBar.style.width = "0";
     }
     else {
-        obj.style.width = "0";
-        obj2.style.width = mood*10 + "%";
-        obj2.style.left = 50 - mood*10 + "%";
+        greenBar.style.width = "0";
+        redBar.style.width = -mood*10 + "%";
+        redBar.style.left = 50 + mood*10 + "%";
     }
 }

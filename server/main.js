@@ -32,6 +32,7 @@ io.on("connection", function(socket){
     clever.ask(message, function(err, response){
       if(err) console.log(err);
       else{
+        console.log("Response: " + response);
         var responseMood = getMood(response);
         moodValue += responseMood;
         console.log("Response: " + response + ", " + responseMood);
@@ -45,6 +46,8 @@ io.on("connection", function(socket){
 });
 
 function getMood(message){
+  if(!message) return 0;
+
   var documentId = (new Date()).getTime();
   var result = session.queueDocument({
       id: "" + documentId,
