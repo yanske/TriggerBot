@@ -54,9 +54,28 @@ window.onload = function(){
 
       socket.on("send-mood", function(mood){
         moodText.innerHTML = "Mood: " + mood;
+        colourBarUpdate(mood);
         if(mood < 0) title.innerHTML = "#Triggered";
         else title.innerHTML = "#NotTriggered";
       });
     }
   })();
 };
+
+function colourBarUpdate(mood) {
+    var obj = document.getElementById('greenBarFiller');
+    var obj2 = document.getElementById('redBarFiller');
+    
+    if (mood > 5)
+        mood = 5;
+    
+    if (mood > 0) {
+        obj.style.width = mood*10 + "%";
+        obj2.style.width = "0";
+    }
+    else {
+        obj.style.width = "0";
+        obj2.style.width = mood*10 + "%";
+        obj2.style.left = 50 - mood*10 + "%";
+    }
+}

@@ -57,6 +57,32 @@ a.uni{
   margin: 30px 0;
 }
 
+#statusBar {
+    position: relative;
+    height: 7px;
+    width: 50%;
+    border: 2px solid black;
+    border-radius: 1px;
+    margin-bottom: 10px;
+}
+
+#greenBarFiller {
+    left:50%;
+    position:absolute;
+    height:3px;
+    width:0px;
+    background: green;
+}
+
+#redBarFiller {
+    left: calc(50% - 0px);
+    position:absolute;
+    height:3px;
+    width: 0px;
+    background:red;
+}
+
+
 h1, h2, h3, h4, h5, h6 {
   font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-transform: uppercase;
