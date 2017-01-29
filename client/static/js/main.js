@@ -12,17 +12,17 @@ window.onload = function(){
 
   var title = document.getElementById("name");
 
-  sendBtn.onclick = function(){
-    if(!thinking){
-      thinking = true;
-      socket.emit("send-message", inputText.value);
-
-      count = 0;
-      loading = setInterval(function(){
-        document.getElementById("response").innerHTML = "Thinking." + new Array(count % 4 + 1).join('.');
-        count++;
-      }, 500);
+  inputText.focus();
+  inputText.onkeypress = function(e){
+    var keyCode = e.keyCode || window.event.which;
+    if(keyCode === 13){
+      sendMessage();
+      return false;
     }
+  };
+
+  sendBtn.onclick = function(){
+    sendMessage();
   };
 
   listenBtn.onclick = function(){
@@ -40,16 +40,7 @@ window.onload = function(){
 
       sendBtn.onclick = function(){
         if(stream) stream.stop();
-        if(!thinking){
-          thinking = true;
-          socket.emit("send-message", inputText.value);
-
-          count = 0;
-          loading = setInterval(function(){
-            document.getElementById("response").innerHTML = "Thinking." + new Array(count % 4 + 1).join('.');
-            count++;
-          }, 500);
-        }
+        sendMessage();
       };
     }).catch(function(error){
       console.log(error);
@@ -81,6 +72,21 @@ window.onload = function(){
     }
   })();
 };
+
+function sendMessage(){
+  if(!thinking){
+    var inputText = document.getElementById("input-text");
+    thinking = true;
+    socket.emit("send-message", inputText.value);
+    inputText.value = "";
+
+    count = 0;
+    loading = setInterval(function(){
+      document.getElementById("response").innerHTML = "Thinking." + new Array(count % 4 + 1).join('.');
+      count++;
+    }, 500);
+  }
+}
 
 function colourBarUpdate(mood) {
     var greenBar = document.getElementById('greenBarFiller');
