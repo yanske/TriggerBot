@@ -2,15 +2,22 @@ var socket;
 var count = 0;
 var loading;
 var thinking = false;
+
+var lines = [];
+for(var i=1;i<=7;i++){
+  lines[i-1] = document.getElementById("line" + i);
+  lines[i-1].style.fontWeight = i % 2 === 0 ? "bold" : "normal";
+}
+
 window.onload = function(){
   var inputText = document.getElementById("input-text");
   var sendBtn = document.getElementById("submit-btn");
-  var responseText = document.getElementById("response");
   var moodText = document.getElementById("mood");
 
   var listenBtn = document.getElementById("listen-btn");
 
   var title = document.getElementById("name");
+
 
   inputText.focus();
   inputText.onkeypress = function(e){
@@ -53,7 +60,7 @@ window.onload = function(){
 
       socket.on("send-reply", function(response){
         clearInterval(loading);
-        responseText.innerHTML = response;
+        document.getElementById("line1").innerHTML = response;
       });
 
       socket.on("send-mood", function(mood){
@@ -77,14 +84,30 @@ function sendMessage(){
   if(!thinking){
     var inputText = document.getElementById("input-text");
     thinking = true;
+
+    addLog(inputText.value);
     socket.emit("send-message", inputText.value);
     inputText.value = "";
 
+    addLog("Thinking.");
+
     count = 0;
     loading = setInterval(function(){
-      document.getElementById("response").innerHTML = "Thinking." + new Array(count % 4 + 1).join('.');
+      document.getElementById("line1").innerHTML = "Thinking." + new Array(count % 4 + 1).join('.');
       count++;
     }, 500);
+  }
+}
+
+function addLog(text){
+  var lineNum = lines.length;
+  for(var i = lineNum-1;i > 0; i--){
+    lines[i].innerHTML = lines[i-1].innerHTML;
+  }
+  lines[0].innerHTML = text;
+
+  for(var i=0;i<lineNum;i++){
+    lines[i].style.fontWeight = lines[i].style.fontWeight === "bold" ? "normal" : "bold";
   }
 }
 
